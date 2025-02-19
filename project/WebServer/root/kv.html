@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skiplist Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            margin: 10px 5px;
+            width: 48%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Skiplist Operations</h2>
+
+        <label for="key">Key:</label>
+        <input type="text" id="key" placeholder="Enter Key">
+
+        <label for="value">Value:</label>
+        <input type="text" id="value" placeholder="Enter Value">
+
+        <div>
+            <button onclick="performOperation('add')">Add</button>
+            <button onclick="performOperation('delete')">Delete</button>
+        </div>
+        <div>
+            <button onclick="performOperation('update')">Update</button>
+            <button onclick="performOperation('find')">Find</button>
+        </div>
+    </div>
+
+    <script>
+        function performOperation(action) {
+            const key = document.getElementById('key').value;
+            const value = document.getElementById('value').value;
+
+            let body;
+            if (action === 'add' || action === 'update') {
+                if (!key || !value) {
+                    alert('Please enter both key and value.');
+                    return;
+                }
+                body = `key=${key}&value=${value}`;
+            } else {
+                if (!key) {
+                    alert('Please enter a key.');
+                    return;
+                }
+                body = `key=${key}`;
+            }
+
+            fetch(`/${action}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: body
+            })
+            .then(response => response.text())
+            .then(result => {
+                const resultPage = window.open('', '_blank');
+                resultPage.document.write(`<html><body><h1>${result}</h1><button onclick="window.close()">Close</button></body></html>`);
+            

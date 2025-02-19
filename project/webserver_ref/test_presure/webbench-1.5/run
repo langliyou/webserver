@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if the correct number of arguments are provided
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 <number_of_clients> <test_duration>"
+  exit 1
+fi
+
+# Assign input arguments to variables
+num_clients=$1
+test_duration=$2
+
+# Define the URL you want to test
+url="http://192.168.101.129:10000/index.html"
+
+# Execute the webbench command with the provided parameters
+./webbench -c "$num_clients" -t "$test_duration" "$url"

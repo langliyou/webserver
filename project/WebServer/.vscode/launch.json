@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "debug server",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/server",  // 可执行文件路径
+            "args": [],  // 如果没有参数传入，可以留空
+            "stopAtEntry": false,  // 是否在入口处停下
+            "cwd": "${workspaceFolder}",  // 当前工作目录
+            "externalConsole": false,  // 使用内部控制台
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",  // gdb 的路径
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "logging": { 
+                "engineLogging": true  // 启用调试日志
+            }
+        }
+    ]
+}
