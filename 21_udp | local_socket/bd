@@ -1,0 +1,27 @@
+#!/bin/bash  
+  
+# 检查是否传入了参数  
+if [ "$#" -ne 1 ]; then  
+    echo "Usage: $0 <source_file_without_ext>"  
+    exit 1  
+fi  
+  
+# 假设传入的参数是文件名（不带扩展名），添加 .c 后缀得到完整的源文件名  
+source_file="${1}.c"  
+  
+# 检查源文件是否存在  
+if [ ! -f "$source_file" ]; then  
+    echo "File $source_file does not exist!"  
+    exit 1  
+fi  
+  
+# 使用gcc编译源文件  
+gcc "$source_file" -o "$1"  
+  
+# 检查编译是否成功  
+if [ $? -eq 0 ]; then  
+    # 如果编译成功，则运行生成的可执行文件  
+    ./"$1"  
+else  
+    echo "Compilation failed!"  
+fi

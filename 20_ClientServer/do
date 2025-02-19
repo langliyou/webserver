@@ -1,0 +1,3 @@
+#!/bin/bash  
+gcc svr_epoll.c -o svr_epoll
+./svr_epoll
